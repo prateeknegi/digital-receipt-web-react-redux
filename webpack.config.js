@@ -1,14 +1,47 @@
+'use strict';
+
 var webpack = require('webpack');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
 
 module.exports = {
- entry : './receipt_app.js',
+ entry : [
+     './app.js'
+ ],
  output: {
      path: './build',
      filename: 'receipt_bundle.js'
  },
+ resolve: {
+     extensions: ['', '.js', '.jsx']
+ },
  plugins: [
         new webpack.optimize.OccurenceOrderPlugin(true),
-        new HtmlWebpackPlugin({ template: './index.html', inject: false })
-    ]
+        new HtmlWebpackPlugin({ template: './index.html', inject: true })
+ ],
+ module: {
+     loaders: [{
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+    }]
+ },  // Our Webpack Development Server config
+ devServer: {
+    inline: true,
+    progress: true,
+    historyApiFallback: true,
+    stats: {
+        // Config for minimal console.log mess.
+        assets: false,
+        colors: true,
+        version: false,
+        hash: false,
+        timings: false,
+        chunks: false,
+        chunkModules: false,
+        errors: true,
+        errorDetails: true,
+        warnings: false
+    },
+    watchOptions: { aggregateTimeout: 300, poll: 1000 }
+ }
 };
