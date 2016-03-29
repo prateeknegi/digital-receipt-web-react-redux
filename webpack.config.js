@@ -5,7 +5,7 @@ var HtmlWebpackPlugin  = require('html-webpack-plugin');
 
 module.exports = {
  entry : [
-     './app.js'
+     './client/receipt_app.js'
  ],
  output: {
      path: './build',
@@ -16,7 +16,7 @@ module.exports = {
  },
  plugins: [
         new webpack.optimize.OccurenceOrderPlugin(true),
-        new HtmlWebpackPlugin({ template: './index.html', inject: true })
+        new HtmlWebpackPlugin({ template: './client/index.html', inject: true })
  ],
  module: {
      loaders: [{
