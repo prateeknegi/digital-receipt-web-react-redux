@@ -8,45 +8,39 @@ var StoreColumn = (props) => {
     }
 };
 
-var TotalColumn = (props) => {
-    return (<td className="align-right">{props.receipt.total}</td>);
-};
+var TotalColumn = (props) =>
+    <td className="align-right">{props.receipt.total}</td>;
 
-var TransactionDateColumn = (props) => {
-    return (
-        <td className="selector bold"
-                onClick={() => props.showReceiptDetail(props.receipt)}>
-            {props.receipt.transactionTime}
-        </td>);
-};
 
-var ReceiptRow = (props) => { return (
+var TransactionDateColumn = (props) =>
+    <td className="selector bold"
+            onClick={() => props.showReceiptDetail(props.receipt)}>
+        {props.receipt.transactionTime}
+    </td>;
+
+var ReceiptRow = (props) =>
     <tr>
         <TransactionDateColumn {...props} />
         <StoreColumn {...props} />
         <TotalColumn {...props} />
-    </tr>);
-};
+    </tr>;
 
-export default (props) => {
-    return (
-        <div className="table-container">
-            <table>
-            <thead>
-                <tr>
-                    <th>Date of Receipt</th>
-                    <th>Fulfillment</th>
-                    <th className="align-right">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                { props.receipts.map((receipt, index) => {
-                    return <ReceiptRow showReceiptDetail={props.showReceiptDetail}
-                                       receipt={receipt}
-                                       key={index} />;
-                })}
-            </tbody>
-            </table>
-        </div>
-    );
-}
+export default (props) =>
+    <div className="table-container">
+        <table>
+        <thead>
+            <tr>
+                <th>Date of Receipt</th>
+                <th>Fulfillment</th>
+                <th className="align-right">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            { props.receipts.map((receipt, index) => {
+                return <ReceiptRow showReceiptDetail={props.showReceiptDetail}
+                                   receipt={receipt}
+                                   key={index} />;
+            })}
+        </tbody>
+        </table>
+    </div>;
