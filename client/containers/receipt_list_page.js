@@ -3,6 +3,7 @@ import ReceiptList from '../components/receipt_list';
 import {connect} from 'react-redux';
 import showReceiptDetailActionCreator from '../actions/show_receipt_details';
 import {fetchReceipts} from '../services'
+import {push} from 'react-router-redux'
 
 const ReceiptListWrapper = React.createClass({
     componentDidMount() {
@@ -10,7 +11,10 @@ const ReceiptListWrapper = React.createClass({
     },
 
     render() {
-        return (<ReceiptList {...this.props} />);
+        return (<ReceiptList
+                    receipts={this.props.receipts}
+                    showReceiptDetail={this.props.showReceiptDetail}
+                />);
     }
 });
 
@@ -22,7 +26,7 @@ const mapDispatchToPropsForReceiptList = function(dispatch){
     return {
         showReceiptDetail(receiptKey) {
             console.log(receiptKey);
-            dispatch( showReceiptDetailActionCreator(receiptKey) );
+            dispatch(push('/detail/'+ receiptKey.divisionNumber));
         },
         fetchReceipts() {
             console.log('fetching receipt');

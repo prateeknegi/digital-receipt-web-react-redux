@@ -21,7 +21,7 @@ ReactDOM.render(
         <Router history={hist} >
             <Route name="top" path='/' component={ReceiptApp} >
                 <Route name="list" path='list' component={ReceiptListContainer} />
-                <Route name="detail" path='detail' component={ReceiptDetailContainer} />
+                <Route name="detail" path='detail/:receiptKey' component={ReceiptDetailContainer} />
             </Route>
         </Router>
     </Provider>,
