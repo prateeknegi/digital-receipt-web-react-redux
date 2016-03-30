@@ -1,6 +1,8 @@
+export const ACTION = 'RECEIPT_DETAIL';
+
 export default (receiptKey) => {
     return {
-        type: 'RECEIPT_DETAIL',
+        type: ACTION,
         receiptKey
     }
 }

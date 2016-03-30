@@ -1,38 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReceiptList from './components/receipt_list';
-import {connect, Provider} from 'react-redux';
-import store from './store';
-import showReceiptDetailActionCreator from './actions/show_receipt_details';
-import ReceiptDetail from './components/receipt_detail';
+import {Provider} from 'react-redux';
+import {Router, Route, DefaultRoute, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 
-var mapStateToPropsForReceiptList = function(state){
-    return { receipts : state.receipts };
+import configureStore from './store';
+import ReceiptListContainer from './containers/receipt_list_page';
+import ReceiptDetailContainer from './containers/receipt_detail_page';
+
+const store = configureStore();
+const hist = syncHistoryWithStore(browserHistory, store);
+
+var ReceiptApp = (props) => {
+  return <div>{props.children}</div>
 };
 
-var mapDispatchToPropsForReceiptList = function(dispatch){
-    return { showReceiptDetail(receiptKey) {
-        console.log(receiptKey);
-        dispatch( showReceiptDetailActionCreator(receiptKey) );
-    }};
-};
-var ReceiptListContainer = connect(mapStateToPropsForReceiptList, mapDispatchToPropsForReceiptList)(ReceiptList);
-
-var mapStateToPropsForReceiptDetail = function(state){
-    return { receiptKey : state.currentReceipt };
-};
-
-var mapDispatchToPropsForReceiptDetail = function(dispatch){
-    return { };
-};
-var ReceiptDetailContainer = connect(mapStateToPropsForReceiptDetail, mapDispatchToPropsForReceiptDetail)(ReceiptDetail)
-
+//<Route name="list" path='list' component={ReceiptListContainer} />
 ReactDOM.render(
-    <Provider store={store()}>
-        <div>
-            <ReceiptListContainer />
-            <ReceiptDetailContainer />
-        </div>
+    <Provider store={store}>
+        <Router history={hist} >
+            <Route name="top" path='/' component={ReceiptApp} >
+                <Route name="list" path='list' component={ReceiptListContainer} />
+                <Route name="detail" path='detail' component={ReceiptDetailContainer} />
+            </Route>
+        </Router>
     </Provider>,
     document.getElementById('receipt-app')
 );
