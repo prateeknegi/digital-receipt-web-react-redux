@@ -1,9 +1,10 @@
 import React from 'react';
-import ReceiptList from '../components/receipt_list';
 import {connect} from 'react-redux';
-import showReceiptDetailActionCreator from '../actions/show_receipt_details';
-import {fetchReceipts} from '../services'
 import {push} from 'react-router-redux'
+
+import {fetchReceipts} from '../services'
+import ReceiptList from '../components/receipt_list';
+import {encode} from '../util/receipt_id_encoder';
 
 const ReceiptListWrapper = React.createClass({
     componentDidMount() {
@@ -26,10 +27,10 @@ const mapDispatchToPropsForReceiptList = function(dispatch){
     return {
         showReceiptDetail(receiptKey) {
             console.log(receiptKey);
-            dispatch(push('/detail/'+ receiptKey.divisionNumber));
+            dispatch(push('/detail/'+ encode(receiptKey)));
         },
         fetchReceipts() {
-            console.log('fetching receipt');
+            console.log('fetching receipts list');
             //do we call action here or inside the service
             dispatch(fetchReceipts());
         }

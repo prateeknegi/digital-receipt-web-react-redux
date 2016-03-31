@@ -1,4 +1,4 @@
-export const ACTION = 'RECEIPT_DETAIL';
+export const ACTION = 'RETRIEVED_RECEIPT_DETAIL';
 
 export default (receiptKey) => {
     return {

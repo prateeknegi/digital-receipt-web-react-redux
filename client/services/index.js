@@ -1,5 +1,6 @@
 import retrievedReceiptListActionCreator from '../actions/retrieved_receipt_list';
 import loadingReceiptListActionCreator from '../actions/loading_receipt_list';
+import retrievedReceiptDetailActionCreator from '../actions/retrieved_receipt_detail';
 
 const receipts = [{
         "divisionNumber": "014",
@@ -37,4 +38,11 @@ export const fetchReceipts = (): Function => {
             dispatch(retrievedReceiptListActionCreator(receipts));
             //in failure, dispatch failed retrieve receipt list
     };
+};
+
+export const fetchReceipt = (receiptKey): Function => {
+  return (dispatch) => {
+        //dispatch retrieve receipt
+        dispatch(retrievedReceiptDetailActionCreator(receiptKey));
+  };
 };
