@@ -2,6 +2,7 @@ import React from 'react';
 
 export default (props) => {
     const receiptKey = props.receiptKey;
+    console.log('receipt_detaol');
     return (
         <div> <h2> Receipt Detail </h2>
             <div>{receiptKey.divisionNumber}</div>

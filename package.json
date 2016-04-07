@@ -4,7 +4,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack --progress --profile --colors --display-error-details",
-    "start": "webpack-dev-server --watch --colors --display-error-details"
+    "start": "webpack-dev-server --watch --colors --display-error-details",
+    "ui": "node ./node_modules/ui-harness/start --entry=./ui-harness"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "babel-preset-react": "6.5.0",
     "babel-preset-stage-0": "6.5.0",
     "html-webpack-plugin": "2.15.0",
+    "ui-harness": "3.7.7",
     "webpack": "1.12.14",
     "webpack-dev-server": "1.14.1"
   },
